@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -13,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('employer_id', Auth::id())->get();
         return Inertia::render('categories/Index', compact('categories'));
     }
 
@@ -35,6 +36,8 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
         ]);
+
+        $validated['employer_id'] = Auth::id();
 
         Category::create($validated);
         return redirect()->route('categories.index')->with('success', 'Unit Category created');

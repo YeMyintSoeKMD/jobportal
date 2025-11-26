@@ -166,6 +166,18 @@ const submit = () => {
                     />
                 </div>
 
+                <div class="grid gap-2">
+                    <Label for="close_date">Closing Date</Label>
+                    <Input
+                        id="close_date"
+                        type="datetime-local"
+                        name="close_date"
+                        placeholder="Closing Date"
+                        v-model="form.close_date"
+                        required
+                    />
+                </div>
+
                 <div>
                     <Button> Submit </Button>
                 </div>

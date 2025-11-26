@@ -23,6 +23,8 @@ import MakePaymentController from '@/actions/App/Http/Controllers/MakePaymentCon
 import CategoryController from '@/actions/App/Http/Controllers/CategoryController';
 import JobController from '@/actions/App/Http/Controllers/JobController';
 import PaymentController from '@/actions/App/Http/Controllers/PaymentController';
+import ApplicationController from '@/actions/App/Http/Controllers/ApplicationController';
+import ResumeController from '@/actions/App/Http/Controllers/ResumeController';
 
 // Routes and controllers 
 
@@ -60,29 +62,23 @@ const employerNavItems: any[] = [
         title: 'Schedules',
         href: ScheduleController.create(),
         icon: LayoutGrid,
+        hasPaid: hasPaid,
     },
     {
         title: 'Chat Bot',
         href: ChatBotController.index(),
         icon: LayoutGrid,
+        hasPaid: hasPaid
     },
     {
-        title: 'Admin User',
-        href: UserController.index(),
+        title: 'Applications',
+        href: ApplicationController.index(),
         icon: LayoutGrid,
+        hasPaid: hasPaid
     },
-    {
-        title: 'Employers',
-        href: UserController.employerIndex(),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Job Seekers',
-        href: UserController.jobSeekerIndex(),
-        icon: LayoutGrid,
-        hasPaid: hasPaid,
-    },
+    
 ];
+
 
 const employeeNavItems: any[] = [
    {
@@ -90,6 +86,12 @@ const employeeNavItems: any[] = [
         href: MakePaymentController.index(),
         icon: LayoutGrid,
         hasPaid: true,             
+    }, 
+    {
+        title: 'Resume',
+        href: ResumeController.index(),
+        icon: LayoutGrid,
+        hasPaid: hasPaid,             
     }, 
 ];
 
@@ -143,6 +145,7 @@ const adminNavItems: any[] = [
 
 <template>
     <Sidebar collapsible="icon" variant="inset">
+
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>

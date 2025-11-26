@@ -51,7 +51,7 @@ class User extends Authenticatable
     // has paid 
     public function hasPaid()
     {
-        return $this->userPayment()->where('payment_status', 'paid')->exists();
+        return $this->userPayment()->where('payment_status', 'completed')->exists();
     }
 
     # Relations

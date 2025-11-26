@@ -18,56 +18,31 @@ import {
 } from '@/components/ui/card'
 import Navbar from '@/pages/layout/Navbar.vue'
 import Footer from './layout/Footer.vue'
+import { useForm } from '@inertiajs/vue3'
+import applications from '@/routes/applications'
+import ApplicationController from '@/actions/App/Http/Controllers/ApplicationController'
 
-const categories = [
-    {
-        id: 1,
-        name: 'Job Category 1',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
+const props = defineProps({
+    jobs: {
+        type: Array
     },
-    {
-        id: 2,
-        name: 'Job Category 2',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
-    },
-    {
-        id: 3,
-        name: 'Job Category 3',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
-    },
-    {
-        id: 4,
-        name: 'Job Category 4',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
-    },
-]
+    categories: {
+        type: Array
+    }
+})
 
-const jobs = [
-    {
-        id: 1,
-        name: 'Job 1',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
-        description: 'Job Description 1',
-    },
-    {
-        id: 2,
-        name: 'Job 2',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
-        description: 'Job Description 2',
-    },
-    {
-        id: 3,
-        name: 'Job 3',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
-        description: 'Job Description 3',
-    },
-    {
-        id: 4,
-        name: 'Job 4',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/20240314_Lisa_Manoban_07.jpg/250px-20240314_Lisa_Manoban_07.jpg',
-        description: 'Job Description 4',
-    },
-]
+const form = useForm({
+    'job_id': '',
+    'candidate_id' : '',
+    'employer_id':'',
+})
+
+const applyJob = (jobId, employerId) => {
+    form.job_id = jobId
+    form.employer_id = employerId
+    form.submit(ApplicationController.store())
+}
+
 </script>
 
 <template>
@@ -75,7 +50,7 @@ const jobs = [
     <Navbar />
 
     <!-- Filter  -->
-    <section class="max-w-7xl mx-auto py-4 border border-green-400 rounded-lg mt-6">
+    <section class="max-w-7xl mx-auto py-4  rounded-lg mt-6">
         <div class="flex items-center gap-2 px-6">
             <div class="w-full">
                 <Input placeholder="Keyword" />
@@ -114,13 +89,10 @@ const jobs = [
     <section class="max-w-7xl mx-auto py-4 mt-6">
         <div>
             <h2 class="text-2xl text-center font-bold mb-4">Explore by Category</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <Card v-for="category in categories" :key="category.id">
-                    <CardContent>
-                        <img :src="category.image" alt="" />
-                        <p class="text-center mt-2">{{ category.name }}</p>
-                    </CardContent>
-                </Card>
+            <div class="flex items-center gap-4">
+                <div v-for="category in categories" :key="category.id" class="p-1 rounded-md min-w-20 text-center border-2  hover:cursor-pointer">
+                     {{ category.name }}
+                </div>
             </div>
         </div>
     </section>
@@ -130,19 +102,38 @@ const jobs = [
         <div>
             <h2 class="text-2xl text-center font-bold mb-4">Jobs</h2>
             <div class="space-y-4">
-                <Card v-for="job in jobs" :key="job.id">
-                    <CardContent class="flex gap-4">
+                <Card v-for="job in jobs" :key="job.id" class="relative">
+                    <div class="absolute right-5 top-2 text-xs bg-green-500 p-1 rounded-md text-white">Posted at {{ job.post_date }}</div>
+
+                    <CardContent class="flex gap-4 ">
                         <img :src="job.image" alt="" class="h-44" />
-                        <div class="flex flex-col justify-between">
+
+                        <div class="flex flex-col justify-between ">
                             <div>
-                                <h4 class="mt-2">{{ job.name }}</h4>
-                                <p>{{ job.description }}</p>
+                                <h4 class="mt-2">{{ job.title }}</h4>
+                                <p>Category : {{ job.category.name }}</p>
+                                <p>Description : {{ job.description }}</p>
+                                <p>Company : {{ job.company_name }}</p>
+                                <p>Location : {{ job.location }}</p>
+                                <p>Salary : {{ job.salary }}</p>
+                                <p>Experience Level : {{ job.experience_level }}</p>
+                                <p v-if="job.close_date" class="text-red-500">Close Date : {{ job.close_date }}</p>
                             </div>
-                            <div>
-                                <Button>Apply</Button>
+                            <div class="my-5">
+                                <h1 class="font-bold">
+                                    Skills Required
+                                </h1>
+                                <p>
+                                    {{ job.skills }}
+                                </p>
                             </div>
+                            
                         </div>
                     </CardContent>
+
+                    <div class="p-4 ms-auto">
+                        <Button @click="applyJob(job.id, job.employer_id)">Apply</Button>
+                    </div>
                 </Card>
             </div>
         </div>

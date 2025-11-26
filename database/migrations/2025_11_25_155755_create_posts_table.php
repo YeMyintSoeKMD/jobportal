@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
+            $table->foreignId('employer_id')->constrained('users')->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
             $table->string('company_name');
@@ -32,6 +33,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
         Schema::dropIfExists('jobs');
     }
 };

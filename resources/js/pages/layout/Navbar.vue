@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DashboardController from '@/actions/App/Http/Controllers/DashboardController';
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -8,10 +9,15 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import { Link } from '@inertiajs/vue3';
+import { dashboard } from '@/routes';
+import { Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const currentUrl = ref(window.location.pathname)
+
+const formSubmit = (role : string) => {
+    useForm({'role' : role}).submit(DashboardController.index())
+}
 </script>
 
 <template>
@@ -50,19 +56,19 @@ const currentUrl = ref(window.location.pathname)
                         <NavigationMenuItem>
                             <NavigationMenuLink as-child
                                 :class="[navigationMenuTriggerStyle(), currentUrl === '/' ? 'bg-green-400' : '']">
-                                <Link href="/login">JOB SEEKER</Link>
+                                <p class="cursor-pointer" @click="formSubmit('job-seeker')" href="/admin/dashboard">JOB SEEKER</p>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <NavigationMenuLink as-child
                                 :class="[navigationMenuTriggerStyle(), currentUrl === '/companies' ? 'bg-green-400' : '']">
-                                <Link href="/login">FREELANCER</Link>
+                                <p class="cursor-pointer" @click="formSubmit('freelancer')">FREELANCER</p>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
                             <NavigationMenuLink as-child
                                 :class="[navigationMenuTriggerStyle(), currentUrl === '/companies' ? 'bg-green-400' : '']">
-                                <Link href="/login">COMPANY</Link>
+                                <p class="cursor-pointer" @click="formSubmit('employer')">COMPANY</p>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>

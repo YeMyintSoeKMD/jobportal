@@ -50,6 +50,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        if($user->role == 'job-seeker' || $user->role == 'freelancer'){
+            return to_route('welcome');
+        }
+
         return to_route('dashboard');
     }
 }

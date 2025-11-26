@@ -7,6 +7,7 @@ use App\Models\Job;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class JobController extends Controller
@@ -16,7 +17,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Post::all();
+        $jobs = Post::with('category')->where('employer_id', Auth::id())->get();
         return Inertia::render('jobs/Index', compact('jobs'));
     }
 
@@ -41,6 +42,7 @@ class JobController extends Controller
 
         Post::create([
             'category_id'      => $request->category_id,
+            'employer_id'       => Auth::id(),
             'title'            => $request->title,
             'description'      => $request->description,
             'company_name'     => $request->company_name,

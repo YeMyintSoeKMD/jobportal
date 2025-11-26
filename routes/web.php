@@ -1,15 +1,20 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatBotController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MakePaymentController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Request;
 
 Route::get('/', [FrontController::class, 'welcome'])->name('home');
 
@@ -25,9 +30,7 @@ require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     // Dashboard
-    Route::get('dashboard', function () {
-        return Inertia::render('Dashboard');
-    });
+    Route::get('dashboard', [DashboardController::class, 'index']);
 
     // Make payment
     Route::get('make-payments', [MakePaymentController::class, 'index'])->name('make-payments');
@@ -55,6 +58,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::delete('freelancers/{id}', [UserController::class, 'deleteFreelancer'])->name('freelancers.delete');
 
     Route::resource('payments', PaymentController::class);
+
+    Route::resource('applications', ApplicationController::class);
+
+    Route::resource('resume', ResumeController::class);
+
 });
 
 require __DIR__ . '/settings.php';

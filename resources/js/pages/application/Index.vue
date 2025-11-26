@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import JobController from '@/actions/App/Http/Controllers/JobController';
+import CategoryController from '@/actions/App/Http/Controllers/CategoryController';
+import ChatBotController from '@/actions/App/Http/Controllers/ChatBotController';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import {
@@ -11,17 +12,18 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/AppLayout.vue';
+import { create as categoryCreate } from '@/routes/categories';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { PlusIcon } from 'lucide-vue-next';
 
 // Props
 defineProps<{
-    jobs: any;
+    applications: any;
 }>();
 
 // Delete
-const deleteJob = (id: any) => {
-    useForm({}).submit(JobController.destroy(id));
+const deleteCategory = (id: any) => {
+    useForm({}).submit(CategoryController.destroy(id));
 };
 </script>
 
@@ -32,7 +34,7 @@ const deleteJob = (id: any) => {
         <div class="m-5">
             <div class="mb-5">
                 <div class="flex justify-end gap-2">
-                    <Link :href="JobController.create()">
+                    <Link :href="ChatBotController.create().url">
                         <Button
                             class="cursor-pointer rounded-2xl bg-amber-500 text-white shadow-sm shadow-amber-50 transition-all hover:bg-amber-600 hover:shadow-sm hover:shadow-amber-300 sm:w-auto"
                             >Add New <plus-icon></plus-icon
@@ -56,86 +58,53 @@ const deleteJob = (id: any) => {
                                         No
                                     </TableHead>
                                     <TableHead class="h-fit py-3"
-                                        >Category</TableHead
+                                        >Candidate</TableHead
                                     >
                                     <TableHead class="h-fit py-3"
-                                        >Title</TableHead
+                                        >Job</TableHead
                                     >
                                     <TableHead class="h-fit py-3"
-                                        >Description</TableHead
-                                    >
-                                    <TableHead class="h-fit py-3"
-                                        >Company Name</TableHead
-                                    >
-                                    <TableHead class="h-fit py-3"
-                                        >Location</TableHead
-                                    >
-                                    <TableHead class="h-fit py-3"
-                                        >Salary</TableHead
-                                    >
-                                    <TableHead class="h-fit py-3"
-                                        >Skills</TableHead
-                                    >
-                                    <TableHead class="h-fit py-3"
-                                        >Experience Level</TableHead
-                                    >
-                                    <TableHead class="h-fit py-3"
-                                        >Post Date</TableHead
-                                    >
-                                    <TableHead class="h-fit py-3"
-                                        >Close Date</TableHead
+                                        >Status</TableHead
                                     >
                                     <TableHead
                                         class="h-fit rounded-r-full py-3"
                                     >
-                                        Action
+                                        Options 
                                     </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                <TableRow v-for="job in jobs" :key="job.id">
+                                <TableRow
+                                    v-for="(application,index) in applications"
+                                    :key="application.id"
+                                >
                                     <TableCell
                                         class="h-fit rounded-l-full py-2"
                                     >
-                                        {{ job.id }}
+                                        {{ index + 1 }}
                                     </TableCell>
                                     <TableCell class="h-fit py-2">{{
-                                        job.category.name
+                                        application.candidate.name
                                     }}</TableCell>
                                     <TableCell class="h-fit py-2">{{
-                                        job.title
+                                        application.job.title
                                     }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.description
+                                    <TableCell class="h-fit py-2"
+                                    :class="{
+                                        'text-amber-500' : application.status == 'pending'
+                                    }">{{
+                                        application.status
                                     }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.company_name
-                                    }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.location
-                                    }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.salary
-                                    }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.skills
-                                    }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.experience_level
-                                    }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.post_date
-                                    }}</TableCell>
-                                    <TableCell class="h-fit py-2">{{
-                                        job.close_date
-                                    }}</TableCell>
+
                                     <TableCell
                                         class="h-fit rounded-r-full py-2"
                                     >
                                         <div class="flex gap-2">
-                                            <Link
+                                            <!-- <Link
                                                 :href="
-                                                    JobController.edit(job.id)
+                                                    CategoryController.edit(
+                                                        category.id,
+                                                    )
                                                 "
                                             >
                                                 <Button
@@ -147,9 +116,11 @@ const deleteJob = (id: any) => {
                                             <Button
                                                 size="sm"
                                                 variant="outline"
-                                                @click="deleteJob(job.id)"
+                                                @click="
+                                                    deleteCategory(category.id)
+                                                "
                                                 >Delete</Button
-                                            >
+                                            > -->
                                         </div>
                                     </TableCell>
                                 </TableRow>
