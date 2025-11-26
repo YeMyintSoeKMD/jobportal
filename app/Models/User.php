@@ -47,4 +47,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // has paid 
+    public function hasPaid()
+    {
+        return $this->userPayment()->where('payment_status', 'paid')->exists();
+    }
+
+    # Relations
+    public function userPayment()
+    {
+        return $this->hasOne(UserPayment::class);
+    }
 }
