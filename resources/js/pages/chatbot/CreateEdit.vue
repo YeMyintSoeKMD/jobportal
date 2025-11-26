@@ -64,12 +64,6 @@ const deleteFaq = (id: string) => {
 }
 
 const submit = () => {
-    // if (!props.category.id) {
-    //     form.submit(CategoryController.store());
-    // } else {
-    //     form.submit(CategoryController.update(props.category.id));
-    // }
-
     form.optionAnswer = faqOptionsAnswers.value;
     form.submit(ChatBotController.store());
 };
@@ -171,7 +165,7 @@ const submit = () => {
                 
 
                 <div>
-                    <Button> Submit </Button>
+                    <Button @click="submit"> Submit </Button>
                 </div>
             </form>
         </div>

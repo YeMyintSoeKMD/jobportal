@@ -26,6 +26,7 @@ import PaymentController from '@/actions/App/Http/Controllers/PaymentController'
 import ApplicationController from '@/actions/App/Http/Controllers/ApplicationController';
 import ResumeController from '@/actions/App/Http/Controllers/ResumeController';
 import FrontController from '@/actions/App/Http/Controllers/FrontController';
+import Layout from '@/layouts/settings/Layout.vue';
 
 // Routes and controllers 
 
@@ -100,6 +101,12 @@ const employeeNavItems: any[] = [
         icon: LayoutGrid,
         hasPaid: hasPaid,             
     }, 
+    {
+        title: 'Interview Schedule',
+        href: ScheduleController.index(),
+        icon: LayoutGrid,
+        hasPaid: hasPaid
+    }
 ];
 
 const adminNavItems: any[] = [

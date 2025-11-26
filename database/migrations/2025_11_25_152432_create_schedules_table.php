@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('candidate_id');
-            $table->unsignedBigInteger('job_id');
-            $table->unsignedBigInteger('application_id');
-            $table->unsignedBigInteger('employer_id');
+            $table->foreignId('candidate_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('job_id')->constrained('posts')->cascadeOnDelete();
+            $table->foreignId('application_id')->constrained('applications')->cascadeOnDelete();
+            $table->foreignId('employer_id')->constrained('users')->cascadeOnDelete();
             $table->timestamp('interview_time');
             $table->text('description');
             $table->timestamps();

@@ -15,7 +15,11 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return Inertia::render('schedules/Index');
+        $schedules = Schedule::with('employer', 'candidate', 'job', 'application')
+        ->where('candidate_id', Auth::id())
+        ->get();
+
+        return Inertia::render('schedules/Index', compact('schedules'));
     }
 
     /**

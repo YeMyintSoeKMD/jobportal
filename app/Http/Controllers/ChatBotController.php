@@ -18,6 +18,11 @@ class ChatBotController extends Controller
         return Inertia::render('chatbot/Index', compact('faqs'));
     }
 
+    public function front()
+    {
+        return Inertia::render('chatbot/Front');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -36,7 +41,6 @@ class ChatBotController extends Controller
             'optionAnswer' => 'required|array'
         ]);
 
-        dd($request->all());
 
         $faqQuestion = FaqQuestion::create([
             'user_id' => Auth::id(),
@@ -44,12 +48,20 @@ class ChatBotController extends Controller
         ]);
 
         foreach ($request->optionAnswer as $option) {
-            // TODO: Create FAQ option and answer
+            // Create FAQ option and answer
+            $faqOption = $faqQuestion->faqOptions()->create([
+                'option_text' => $option['option'] // This will be set when answer is created
+            ]);
+
+            $faqOption->faqAnswer()->create([
+                'answer_text' => $option['answer']
+            ]);
         }
 
 
 
         // TODO: Handle optionAnswer array - create related FAQ options and answers
+        return redirect()->route('chat-bot.index');
     }
 
     /**

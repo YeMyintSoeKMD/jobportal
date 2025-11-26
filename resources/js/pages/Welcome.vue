@@ -24,6 +24,8 @@ import ApplicationController from '@/actions/App/Http/Controllers/ApplicationCon
 import { useBasicSearch } from '@/composables/useBasicSearch'
 import { ref, watch } from 'vue'
 import FrontController from '@/actions/App/Http/Controllers/FrontController'
+import { Link } from 'lucide-vue-next'
+import ChatBotController from '@/actions/App/Http/Controllers/ChatBotController'
 
 const props = defineProps({
     jobs: {
@@ -119,6 +121,7 @@ const search = (id: string) => {
             <div class="space-y-4">
                 <Card v-for="job in jobs" :key="job.id" class="relative border-2 "
                 :class="{
+                    'border-amber-300' : job.application_status == 'pending',
                     'border-green-300' : job.application_status == 'accepted',
                     'border-blue-300' : job.application_status == 'viewed',
                     'border-red-300' : job.application_status == 'rejected'
@@ -127,6 +130,7 @@ const search = (id: string) => {
                     <div class="absolute right-5 top-2 text-xs bg-green-500 p-1 rounded-md text-white">Posted at {{ job.post_date }}</div>
 
                     <CardContent class="flex gap-4 ">
+                        
                         <img :src="job.image" alt="" class="h-44" />
 
                         <div class="flex flex-col justify-between ">
@@ -152,7 +156,8 @@ const search = (id: string) => {
                         </div>
                     </CardContent>
 
-                    <div class="p-4 ms-auto">
+                    <div class="p-4 ms-auto space-x-5">
+                        <Button variant="outline">Chat with employer</Button>
                         <Button @click="applyJob(job.id, job.employer_id)" v-if="!job.applied">Apply</Button>
                         <Button variant="outline" v-else>
 
