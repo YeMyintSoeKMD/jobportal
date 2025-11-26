@@ -25,6 +25,7 @@ import JobController from '@/actions/App/Http/Controllers/JobController';
 import PaymentController from '@/actions/App/Http/Controllers/PaymentController';
 import ApplicationController from '@/actions/App/Http/Controllers/ApplicationController';
 import ResumeController from '@/actions/App/Http/Controllers/ResumeController';
+import FrontController from '@/actions/App/Http/Controllers/FrontController';
 
 // Routes and controllers 
 
@@ -81,7 +82,13 @@ const employerNavItems: any[] = [
 
 
 const employeeNavItems: any[] = [
-   {
+    {
+        title: 'Home',
+        href: FrontController.welcome(),
+        icon: LayoutGrid,
+        hasPaid: true,             
+    }, 
+    {
         title: 'Make Payment',
         href: MakePaymentController.index(),
         icon: LayoutGrid,

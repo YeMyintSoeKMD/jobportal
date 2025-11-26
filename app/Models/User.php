@@ -59,4 +59,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserPayment::class);
     }
+
+    public function applications(){
+        return $this->hasMany(Application::class, 'candidate_id', 'id');
+    }
 }

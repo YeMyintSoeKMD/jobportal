@@ -132,7 +132,9 @@ const applyJob = (jobId, employerId) => {
                     </CardContent>
 
                     <div class="p-4 ms-auto">
-                        <Button @click="applyJob(job.id, job.employer_id)">Apply</Button>
+                        <Button @click="applyJob(job.id, job.employer_id)" v-if="!job.applied">Apply</Button>
+                        <Button variant="outline" v-else>{{ job.application_status }} ...</Button>
+
                     </div>
                 </Card>
             </div>

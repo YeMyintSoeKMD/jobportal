@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class FrontController extends Controller
@@ -12,7 +13,10 @@ class FrontController extends Controller
     // Welcome
     public function welcome()
     {
-        $jobs = Post::with('category')->get();
+        $jobs = Post::with('category', 'applications')
+        ->get();
+
+
         $categories = Category::all();
         return Inertia::render('Welcome', [
             'jobs' => $jobs,
