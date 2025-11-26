@@ -9,6 +9,13 @@ import AuthBase from '@/layouts/AuthLayout.vue';
 import { login } from '@/routes';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 </script>
 
 <template>
@@ -80,6 +87,26 @@ import { LoaderCircle } from 'lucide-vue-next';
                         placeholder="Confirm password"
                     />
                     <InputError :message="errors.password_confirmation" />
+                </div>
+                <div class="grid gap-2">
+                    <Label for="role">User Type</Label>
+                    <Select name="role">
+                        <SelectTrigger>
+                        <SelectValue placeholder="Select a user type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                        <SelectItem value="employer">
+                            Employer
+                        </SelectItem>
+                        <SelectItem value="jobseeker">
+                            Jobseeker
+                        </SelectItem>
+                        <SelectItem value="freelancer">
+                            Freelancer
+                        </SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <InputError :message="errors.role" />
                 </div>
 
                 <Button

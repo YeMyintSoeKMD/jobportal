@@ -13,38 +13,55 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import ScheduleController from '@/actions/App/Http/Controllers/ScheduleController';
+import MakePaymentController from '@/actions/App/Http/Controllers/MakePaymentController';
+import CategoryController from '@/actions/App/Http/Controllers/CategoryController';
+import JobController from '@/actions/App/Http/Controllers/JobController';
 
 // Routes and controllers 
 
-const mainNavItems: NavItem[] = [
+  const page = usePage<any>()
+
+  const hasPaid = page.props.auth.hasPaid;
+  const userRole = page.props.auth.user.role;
+
+const employerNavItems: any[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+        hasPaid: true,
+    },
+    {
+        title: 'Make Payment',
+        href: MakePaymentController.index(),
+        icon: LayoutGrid,
+        hasPaid: true,             
+    },
+    {
+        title: 'Categories',
+        href: CategoryController.index(),
+        icon: LayoutGrid,
+        hasPaid: hasPaid,
+    },
+    {
+        title: 'Jobs',
+        href: JobController.index(),
+        icon: LayoutGrid,
+        hasPaid: hasPaid,
     },
     {
         title: 'Schedules',
         href: ScheduleController.index(),
         icon: LayoutGrid,
+        hasPaid: hasPaid,
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
+
 </script>
 
 <template>
@@ -62,11 +79,10 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain :items="employerNavItems" v-if="userRole === 'employer'" />
         </SidebarContent>
 
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
     </Sidebar>
