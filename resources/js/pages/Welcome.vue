@@ -68,7 +68,7 @@ const searchByCategory = (event: any) => {
     <!-- Filter  -->
     <section class="max-w-7xl mx-auto py-4  rounded-lg mt-6 h-[50vh] flex flex-col items-center justify-center"
         style="background-image: url('photos/hero2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="text-5xl font-bold my-6">Find your dream job</div>
+        <!-- <div class="text-5xl font-bold my-6">Find your dream job</div> -->
         <div class="flex items-center gap-2 px-6 w-full">
             <div class="w-full">
                 <Input placeholder="Keyword" v-model="q" class="bg-white" />

@@ -6,12 +6,16 @@ import {
 import Navbar from '@/pages/layout/Navbar.vue'
 import Footer from './layout/Footer.vue'
 
-defineProps<{companies: any}>()
+defineProps<{ companies: any }>()
 </script>
 
 <template>
     <!-- Navigation  -->
     <Navbar />
+
+    <section class="max-w-7xl mx-auto py-4  rounded-lg mt-6 h-[50vh] flex flex-col items-center justify-center"
+        style="background-image: url('photos/company.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    </section>
 
     <!-- Category  -->
     <section class="max-w-7xl mx-auto py-4 mt-6 min-h-[84vh]">
