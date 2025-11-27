@@ -63,4 +63,8 @@ class User extends Authenticatable
     public function applications(){
         return $this->hasMany(Application::class, 'candidate_id', 'id');
     }
+
+    public function faq(){
+        return $this->hasMany(FaqQuestion::class);
+    }
 }

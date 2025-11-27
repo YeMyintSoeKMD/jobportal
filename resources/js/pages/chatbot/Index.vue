@@ -65,6 +65,11 @@ const deleteChatBot = (id: any) => {
                                     >
                                         Options 
                                     </TableHead>
+                                    <TableHead
+                                        class="h-fit rounded-r-full py-3"
+                                    >
+                                        Actions  
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>

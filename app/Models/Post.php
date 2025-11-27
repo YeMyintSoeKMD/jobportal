@@ -9,7 +9,7 @@ class Post extends Model
 {
     protected $guarded = [];
 
-    protected $appends = ['applied', 'application_status'];
+    protected $appends = ['applied', 'application_status', 'employer_faq'];
 
     public function category(){
         return $this->belongsTo(Category::class);
@@ -27,6 +27,14 @@ class Post extends Model
         return $this->applications()
         ->where('candidate_id', Auth::id())
         ->exists();
+    }
+
+    public function employer(){
+        return $this->belongsTo(User::class, 'employer_id');
+    }
+
+    public function getEmployerFaqAttribute(){
+        return optional($this->employer)->faq()->exists();
     }
 
     public function getApplicationStatusAttribute(){

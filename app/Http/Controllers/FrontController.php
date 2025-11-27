@@ -28,7 +28,6 @@ class FrontController extends Controller
         })
         ->get();
 
-
         $categories = Category::all();
         return Inertia::render('Welcome', [
             'jobs' => $jobs,

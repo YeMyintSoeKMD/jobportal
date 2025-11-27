@@ -146,7 +146,7 @@ const searchByCategory = (event: any) => {
                     </CardContent>
 
                     <div class="p-4 ms-auto space-x-5">
-                        <Button type="button" @click="chatBot(job.employer_id)" variant="outline">Chat with employer</Button>
+                        <Button v-if="job.employer_faq" type="button" @click="chatBot(job.employer_id)" variant="outline">Chat with employer</Button>
                         <Button @click="applyJob(job.id, job.employer_id)" v-if="!job.applied">Apply</Button>
                         <Button variant="outline" v-else>
 

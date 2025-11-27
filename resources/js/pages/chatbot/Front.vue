@@ -38,7 +38,8 @@
               <template v-if="chats">
                 <!-- Received message -->
                 <div class="flex items-start gap-3">
-                  <Avatar size="sm"><img src="/images/avatar-2.jpg" alt="Anna"/></Avatar>
+                  <!-- :src="`/images/${payment.voucher_image}`" -->
+                  <Avatar size="sm"><img src="/images/chatbot.png" alt="Anna"/></Avatar>
                   <div>
                     <div class="bg-sky-600 text-white p-3 rounded-xl shadow-sm max-w-prose">
                       <p class="text-sm">{{ chats.data[0].question }}</p>
@@ -49,7 +50,7 @@
                 <!-- Sent message -->
                 <div class="flex items-end justify-end">
                   <div class="text-right">
-                    <div v-for="option in chats.data[0].faq_options" :key="option.id" class="block my-3 border-2 border-green-300 cursor-pointer p-3 rounded-xl shadow-sm max-w-prose">
+                    <div v-for="option in chats.data[0].faq_options" :key="option.id" class="block my-3 border border-gray-800 cursor-pointer px-3 py-1 rounded-xl shadow-sm max-w-prose">
                       <p class="text-sm" @click="selectOption(option.id)">{{ option.option_text }}</p>
                     </div>
                   </div>
@@ -57,7 +58,7 @@
 
                 <!-- Typing indicator -->
                 <div v-if="typing" class="flex items-start gap-3">
-                  <Avatar size="sm"><img src="/images/avatar-2.jpg" alt="Anna"/></Avatar>
+                  <Avatar size="sm"><img src="/images/chatbot.png" alt="Anna"/></Avatar>
                   <div class="bg-white p-2 rounded-xl shadow-sm">
                     <div class="flex gap-1 items-center px-2 py-1">
                       <span class="dot h-2 w-2 rounded-full animate-pulse bg-slate-500"></span>
@@ -69,7 +70,7 @@
 
                 <!-- Received message -->
                 <div v-if="!typing" class="flex items-start gap-3">
-                  <Avatar v-if="answer" size="sm"><img src="/images/avatar-2.jpg" alt="Anna"/></Avatar>
+                  <Avatar v-if="answer" size="sm"><img src="/images/chatbot.png" alt="Anna"/></Avatar>
                   <div v-if="answer">
                     <div  class="bg-sky-600 text-white p-3 rounded-xl shadow-sm max-w-prose">
                       <p class="text-sm">{{ answer?.answer_text }}</p>
@@ -79,7 +80,7 @@
 
                 <div v-if="answer && !typing" class="flex items-end justify-end">
                   <div class="text-right">
-                    <div  class="block my-3 border-2 border-green-300 cursor-pointer p-3 rounded-xl shadow-sm max-w-prose">
+                    <div  class="block my-3 border border-gray-800 cursor-pointer px-3 py-1 rounded-xl shadow-sm max-w-prose">
                       <p class="text-sm" @click="nextQuestion()">Continue</p>
                     </div>
                   </div>
