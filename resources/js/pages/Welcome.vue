@@ -227,7 +227,7 @@ const updateTurnOff = (projectId) => {
     <section v-if="projects" class="max-w-7xl mx-auto py-4 mt-6">
         <div>
             <h2 class="text-2xl text-center font-bold mb-4">Projects</h2>
-            <div v-if="projects.length > 0" class="space-y-4 grid grid-cols-2 gap-2">
+            <div v-if="projects.length > 0" class="space-y-4 grid grid-cols-1 lg:grid-cols-2 gap-2">
                 <Card v-for="(project,index) in projects" :key="project.id" class="relative border-2 "
                 :class="{
                     'border-amber-300' : project.status == 'in_progress',
