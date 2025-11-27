@@ -25,15 +25,13 @@ Route::get('companies', [FrontController::class, 'companies'])->name('companies'
 Route::get('partner-networks', [FrontController::class, 'partnerNetworks'])->name('partner-networks');
 Route::get('career-resources', [FrontController::class, 'careerResources'])->name('career-resources');
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     // Dashboard
-    Route::get('dashboard', [DashboardController::class, 'index']);
+    // Route::get('dashboard', [DashboardController::class, 'index']);
 
     // Companies
     Route::resource('companies', CompanyController::class);
