@@ -2,16 +2,21 @@
 import {
     Card,
     CardContent,
+    CardFooter,
 } from '@/components/ui/card'
 import Navbar from '@/pages/layout/Navbar.vue'
 import Footer from './layout/Footer.vue'
 
-defineProps<{partnerNetworks: any}>()
+defineProps<{ partnerNetworks: any }>()
 </script>
 
 <template>
     <!-- Navigation  -->
     <Navbar />
+
+    <section class="max-w-7xl mx-auto py-4  rounded-lg mt-6 h-[50vh] flex flex-col items-center justify-center"
+        style="background-image: url('photos/network.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    </section>
 
     <!-- Category  -->
     <section class="max-w-7xl mx-auto py-4 mt-6 min-h-[84vh]">
@@ -20,11 +25,14 @@ defineProps<{partnerNetworks: any}>()
             <div v-if="partnerNetworks.length > 0" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <template v-for="partnerNetwork in partnerNetworks" :key="partnerNetwork.id">
                     <a :href="partnerNetwork.website" target="_blank">
-                        <Card>
-                            <CardContent>
-                                <img :src="`images/${partnerNetwork.logo}`" alt="" />
-                                <p class="text-center mt-2">{{ partnerNetwork.name }}</p>
+                        <Card class="h-full">
+                            <CardContent class="h-68 mx-auto">
+                                <img :src="`images/${partnerNetwork.logo}`" alt=""
+                                    class="h-full mx-auto object-cover" />
                             </CardContent>
+                            <CardFooter class="text-center mx-auto">
+                                {{ partnerNetwork.name }}
+                            </CardFooter>
                         </Card>
                     </a>
                 </template>

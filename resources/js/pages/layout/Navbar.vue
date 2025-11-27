@@ -12,12 +12,12 @@ import {
 } from '@/components/ui/navigation-menu'
 import { dashboard, logout } from '@/routes';
 import { Link, router, useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const currentUrl = ref(window.location.pathname)
 
-const formSubmit = (role : string) => {
-    useForm({'role' : role}).submit(DashboardController.index())
+const formSubmit = (role: string) => {
+    useForm({ 'role': role }).submit(DashboardController.index())
 }
 
 const login = () => {
@@ -35,13 +35,15 @@ const register = () => {
 const freelancerProject = () => {
     useForm({'show_freelance_project' : true}).submit(FrontController.welcome())
 }
+
+
 </script>
 
 <template>
     <nav class="max-w-7xl mx-auto py-4">
         <div class="flex flex-col lg:flex-row justify-start lg:justify-between items-center">
             <div>
-                <Link href="/" class="text-2xl font-bold text-green-500">CAREER BRIDGE</Link>
+                <Link href="/" class="text-xl font-bold text-green-500">CAREER BRIDGE</Link>
             </div>
             <div>
                 <NavigationMenu :viewport="false">
@@ -64,10 +66,10 @@ const freelancerProject = () => {
                                 <Link href="/career-resources">CAREER RESOURCES</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
-                        <NavigationMenuItem>
+                            <NavigationMenuItem>
                             <NavigationMenuLink as-child
-                                :class="[navigationMenuTriggerStyle(), currentUrl === '/career-resources' ? 'bg-green-400' : '']">
-                                <p @click="freelancerProject()">FREELANCERS' PROJECTS</p>
+                                :class="[navigationMenuTriggerStyle(), currentUrl === '/' ? 'bg-green-400' : '']">
+                                <p class="cursor-pointer" @click="freelancerProject()">FREELANCERS' PROJECTS</p>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>
@@ -80,7 +82,8 @@ const freelancerProject = () => {
                             <NavigationMenuLink as-child
                                 v-if="$page.props.auth.user.role == 'job-seeker'"
                                 :class="[navigationMenuTriggerStyle(), currentUrl === '/' ? 'bg-green-400' : '']">
-                                <p class="cursor-pointer" @click="formSubmit('job-seeker')" href="/admin/dashboard">JOB SEEKER</p>
+                                <p class="cursor-pointer" @click="formSubmit('job-seeker')" href="/admin/dashboard">JOB
+                                    SEEKER</p>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>

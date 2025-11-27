@@ -6,12 +6,16 @@ import {
 import Navbar from '@/pages/layout/Navbar.vue'
 import Footer from './layout/Footer.vue'
 
-defineProps<{careerResources: any}>()
+defineProps<{ careerResources: any }>()
 </script>
 
 <template>
     <!-- Navigation  -->
     <Navbar />
+
+    <section class="max-w-7xl mx-auto py-4  rounded-lg mt-6 h-[50vh] flex flex-col items-center justify-center"
+        style="background-image: url('photos/career.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    </section>
 
     <!-- Category  -->
     <section class="max-w-7xl mx-auto py-4 mt-6 min-h-[84vh]">
@@ -21,19 +25,19 @@ defineProps<{careerResources: any}>()
             <div v-if="careerResources.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <template v-for="careerResource in careerResources" :key="careerResource.id">
                     <a :href="careerResource.youtube_src" target="_blank">
-                    <Card>
-                        <CardContent>
-                            <div>
-                                <iframe :src="careerResource.youtube_src" class="w-full h-96"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                        </div>
-                        <div class="p-4">
-                            <p>{{ careerResource.name }}</p>
-                        </div>
-                    </CardContent>
-                </Card>
-                </a>
+                        <Card>
+                            <CardContent>
+                                <div>
+                                    <iframe :src="careerResource.youtube_src" class="w-full h-96"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                </div>
+                                <div class="p-4">
+                                    <p>{{ careerResource.name }}</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </a>
                 </template>
             </div>
             <p v-else class="text-center">No career resources found.</p>
