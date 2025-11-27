@@ -15,8 +15,8 @@ import { ref } from 'vue';
 
 const currentUrl = ref(window.location.pathname)
 
-const formSubmit = (role : string) => {
-    useForm({'role' : role}).submit(DashboardController.index())
+const formSubmit = (role: string) => {
+    useForm({ 'role': role }).submit(DashboardController.index())
 }
 </script>
 
@@ -24,7 +24,7 @@ const formSubmit = (role : string) => {
     <nav class="max-w-7xl mx-auto py-4">
         <div class="flex flex-col lg:flex-row justify-start lg:justify-between items-center">
             <div>
-                <Link href="/" class="text-2xl font-bold text-green-500">CAREER BRIDGE</Link>
+                <Link href="/" class="text-xl font-bold text-green-500">CAREER BRIDGE</Link>
             </div>
             <div>
                 <NavigationMenu :viewport="false">
@@ -56,7 +56,8 @@ const formSubmit = (role : string) => {
                         <NavigationMenuItem>
                             <NavigationMenuLink as-child
                                 :class="[navigationMenuTriggerStyle(), currentUrl === '/' ? 'bg-green-400' : '']">
-                                <p class="cursor-pointer" @click="formSubmit('job-seeker')" href="/admin/dashboard">JOB SEEKER</p>
+                                <p class="cursor-pointer" @click="formSubmit('job-seeker')" href="/admin/dashboard">JOB
+                                    SEEKER</p>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>

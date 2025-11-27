@@ -2,6 +2,7 @@
 import {
     Card,
     CardContent,
+    CardFooter,
 } from '@/components/ui/card'
 import Navbar from '@/pages/layout/Navbar.vue'
 import Footer from './layout/Footer.vue'
@@ -21,10 +22,13 @@ defineProps<{ partnerNetworks: any }>()
                 <template v-for="partnerNetwork in partnerNetworks" :key="partnerNetwork.id">
                     <a :href="partnerNetwork.website" target="_blank">
                         <Card class="h-full">
-                            <CardContent class=" border">
-                                <img :src="`images/${partnerNetwork.logo}`" alt="" class="mx-auto" />
-                                <p class="text-center mt-2">{{ partnerNetwork.name }}</p>
+                            <CardContent class="h-68 mx-auto">
+                                <img :src="`images/${partnerNetwork.logo}`" alt=""
+                                    class="h-full mx-auto object-cover" />
                             </CardContent>
+                            <CardFooter class="text-center mx-auto">
+                                {{ partnerNetwork.name }}
+                            </CardFooter>
                         </Card>
                     </a>
                 </template>
