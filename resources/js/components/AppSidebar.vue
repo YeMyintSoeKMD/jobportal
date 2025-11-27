@@ -64,12 +64,6 @@ const employerNavItems: any[] = [
         hasPaid: hasPaid,
     },
     {
-        title: 'Schedules',
-        href: ScheduleController.create(),
-        icon: LayoutGrid,
-        hasPaid: hasPaid,
-    },
-    {
         title: 'Chat Bot',
         href: ChatBotController.index(),
         icon: LayoutGrid,
@@ -134,12 +128,6 @@ const adminNavItems: any[] = [
     {
         title: 'Career Resources',
         href: CareerResourceController.index(),
-        icon: LayoutGrid,
-        hasPaid: true
-    },
-    {
-        title: 'Schedules',
-        href: ScheduleController.create(),
         icon: LayoutGrid,
         hasPaid: true
     },
