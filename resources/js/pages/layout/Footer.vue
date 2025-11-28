@@ -109,6 +109,23 @@ import { Link } from '@inertiajs/vue3';
                                 </li>
                             </ul>
                         </div>
+                        <div class="mt-10 md:mt-0">
+                            <h3 class="text-sm/6 font-semibold text-gray-900 dark:text-white">Contact</h3>
+                            <ul role="list" class="mt-6 space-y-4">
+                                <li>
+                                    <a href="mailto:info@jobportal.com"
+                                        class="text-sm/6 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300">info@careerbridge.com</a>
+                                </li>
+                                <li>
+                                    <a href="tel:+1234567890"
+                                        class="text-sm/6 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300">+959 406 524 971</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com/maps?q=123+Main+Street,+City,+Country"
+                                        class="text-sm/6 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300">No. 9981, Kabaraye Pagoda Road, Yangon, Myanmar</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

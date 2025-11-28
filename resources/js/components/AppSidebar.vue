@@ -82,7 +82,7 @@ const employerNavItems: any[] = [
 
 const employeeNavItems: any[] = [
     {
-        title: 'Home',
+        title: 'Front',
         href: FrontController.welcome(),
         icon: LayoutGrid,
         hasPaid: true,             
@@ -94,6 +94,12 @@ const employeeNavItems: any[] = [
         hasPaid: true,             
     }, 
     {
+        title: 'Generate Resume',
+        href: ResumeController.generateResume(),
+        icon: LayoutGrid,
+        hasPaid: true,
+    },
+    {
         title: 'Interview Schedule',
         href: ScheduleController.index(),
         icon: LayoutGrid,
@@ -103,7 +109,7 @@ const employeeNavItems: any[] = [
 
 const freelancerNavItems: any[] = [
     {
-        title: 'Home',
+        title: 'Front',
         href: FrontController.welcome(),
         icon: LayoutGrid,
         hasPaid: true,             

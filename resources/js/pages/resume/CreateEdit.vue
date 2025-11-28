@@ -397,8 +397,8 @@ const removesocial = (key: string) => {
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="languagess">Languagess</Label>
-                    <Input id="languagess" type="text" v-model="languages" @keyup.enter.stop="handlelanguages" placeholder="Press Enter To Add" />
+                    <Label for="languages">Languages</Label>
+                    <Input id="languages" type="text" v-model="languages" @keyup.enter.stop="handlelanguages" placeholder="Press Enter To Add" />
                     <InputError :message="form.errors.languages" />
                 </div>
 

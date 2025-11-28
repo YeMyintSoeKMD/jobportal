@@ -74,6 +74,7 @@ const sendcomment = (id:string) => {
     })
 
     commentForm.comment = []
+    commentForm.reset()
 }
 
 const addcomment = (value:string, projectId : string) => {

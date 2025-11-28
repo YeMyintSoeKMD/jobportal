@@ -76,6 +76,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('resume', ResumeController::class);
 
+    Route::get('generate-resume', [ResumeController::class, 'generateResume'])->name('resume.generate');
+
     Route::resource('project', ProjectController::class);
     Route::post('project/store-comment', [ProjectController::class, 'storeComment'])->name('project.store-comment');
 

@@ -15,6 +15,7 @@ import { Link, router, useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 const currentUrl = ref(window.location.pathname)
+const urlParams = new URLSearchParams(window.location.search);
 
 const formSubmit = (role: string) => {
     useForm({ 'role': role }).submit(DashboardController.index())
@@ -66,9 +67,9 @@ const freelancerProject = () => {
                                 <Link href="/career-resources">CAREER RESOURCES</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
-                            <NavigationMenuItem>
+                        <NavigationMenuItem v-if="$page.props.auth.user?.role === 'freelancer'">
                             <NavigationMenuLink as-child
-                                :class="[navigationMenuTriggerStyle(), currentUrl === '/' ? 'bg-green-400' : '']">
+                                :class="[navigationMenuTriggerStyle(), urlParams.has('show_freelance_project') ? 'bg-green-400' : '']">
                                 <p class="cursor-pointer" @click="freelancerProject()">FREELANCERS' PROJECTS</p>
                             </NavigationMenuLink>
                         </NavigationMenuItem>

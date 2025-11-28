@@ -134,4 +134,10 @@ class ResumeController extends Controller
     {
         //
     }
+
+    // generate resume page
+    public function generateResume()
+    {
+        return Inertia::render('resume/GenerateResume');
+    }
 }
